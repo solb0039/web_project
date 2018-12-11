@@ -1,0 +1,33 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset = "UTF-8">
+	<title>{{ title }} </title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+</head>
+<body>
+	<div>
+	<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
+       		<a class="navbar-brand">SolFjell System</a>
+		<ul class="nav navbar-nav">
+      			<li class="active"><a href="/">Home<span class="sr-only">(current)</span></a></li>
+      			<li><a href="/lodgings">Lodgings</a></li>
+      			<li><a href="/users">Users</a></li>
+    		</ul>
+	</nav>
+	</div>
+	<h1 class="mt-5">LODGING DATA SYSTEM</h1>
+
+		{{{ body }}}
+
+	<footer class="footer">
+		<div class="container">
+			<span class="text-muted"> Footer content</span>
+		</div>	
+	</footer>
+</body>
+</html>

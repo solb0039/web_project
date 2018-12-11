@@ -1,0 +1,90 @@
+
+
+<form id="usersinput" action="/users" method="post">
+  First Name:<br>
+  <input type="text" name="first_name"><br>
+  Last Name:<br>
+  <input type="text" name="last_name"><br>
+  Street::<br>
+  <input type="text" name="street"><br>
+  City:<br>
+  <input type="text" name="city"><br>
+  State:<br>
+  <input type="text" name="state"><br>
+  Zip: <br>
+  <input type="text" name="zip"><br>
+  <input type="submit" value="Submit">
+</form>
+
+{{#if table}}
+<table>
+	<thead>
+		<tr>
+			<th>Owner ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Street</th>
+			<th>City</th>
+			<th>State</th>
+			<th>Zip</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	{{#each userInfo}}
+		<tr>
+			<td>{{this.ownerid}}</td>
+			<td>{{this.first_name}}</td>
+			<td>{{this.last_name}}</td>
+			<td>{{this.street}}</td>
+			<td>{{this.city}}</td>
+			<td>{{this.state}}</td>
+			<td>{{this.zip}}</td>
+			<td>
+				<a href="/updateUsers?id={{this.ownerid}}"><input type="button" value="Edit"></a>
+			</td>
+			<td>
+				<form action="/users_delete/{{this.id}}" method="post" >		
+					<input type="submit" value="Delete" />
+				</form>
+			</td>
+		</tr>
+	{{/each}}
+	</tbody>
+</table>
+{{/if}}
+
+{{#if update}}
+	<form action="/users_put/{{userInfo.id}}" method="post">
+		<table id="userEditTable">
+		<thead>
+			<tr>
+				<th>Owner ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Street</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Zip</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{userInfo.ownerid}}</td>
+				<td><input type="text" name="first_name" value="{{userInfo.first_name}}" /></td>
+				<td><input type="text" name="last_name" value="{{userInfo.last_name}}"/></td>
+				<td><input type="text" name="street" value="{{userInfo.street}}"/></td>
+				<td><input type="text" name="city" value="{{userInfo.city}}" /></td>
+				<td><input type="text" name="state" value="{{userInfo.state}}"/></td>
+				<td><input type="text" name="zip" value="{{userInfo.zip}}" maxlength="5"/></td>
+				<td><input type="submit" value="Update"/></td>
+				<td><a href="/users"><input type="button" value="Cancel" ></a></td>
+			</tr>
+		</tbody>
+	</table>
+	</form>
+{{/if}}
+

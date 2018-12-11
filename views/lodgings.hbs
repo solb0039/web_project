@@ -1,0 +1,113 @@
+<p>
+Lodging Page Info
+</p>
+
+<form id="lodgingsinput" action="/lodgings" method="post">
+  Property Name:<br>
+  <input type="text" name="name"><br>
+  Description:<br>
+  <input type="text" name="description"><br>
+  Street:<br>
+  <input type="text" name="street"><br>
+  City:<br>
+  <input type="text" name="city"><br>
+  State:<br>
+  <input type="text" name="state"><br>
+  Zip: <br>
+  <input type="text" name="zip"><br>
+  Price:<br>
+  <input type="text" name="price"><br>
+  Owner ID: <br>
+  <input type="text" name="ownerID"><br>
+  <input type="submit" value="Submit">
+</form>
+
+{{#if table}}
+<table id="lodgingTable">
+    <thead>
+        <tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Street</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Zip</th>
+		<th>Price</th>
+		<th>Owner ID</th>
+		<th></th>	
+		<th></th>
+        </tr>
+   </thead>
+
+<tbody>	
+	{{#each lodgingsInfo.lodgings}}
+		<tr>	
+			<td>{{this.id}}</td>
+			<td>{{this.name}}</td>
+			<td>{{this.description}}</td>
+			<td>{{this.street}}</td>
+			<td>{{this.city}}</td>
+			<td>{{this.state}}</td>
+			<td>{{this.zip}}</td>
+			<td>{{this.price}}</td>
+			<td>{{this.ownerid}}</td>
+			<td>
+				<a href="/updateTable?id={{this.id}}"><input type="button" value="Edit"></a>			
+			</td>
+			<td>
+				<form action="/lodgings_delete/{{this.id}}" method="post" > 
+					<input type="submit" value="Delete" />
+				</form>
+			</td>
+		</tr>	
+	{{/each}}		
+</tbody>
+</table>
+{{/if}}
+
+{{#if update}}
+	<form action="/lodgings_put/{{lodgingsInfo.id}}" method="post">
+		<table id="editTable">
+			<thead>
+        			<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Street</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Zip</th>
+					<th>Price</th>
+					<th>Owner ID</th>
+					<th></th>
+					<th></th>
+			        </tr>
+  			 </thead>
+			<tbody>	
+				<tr>	
+					<td>{{lodgingsInfo.id}}</td>
+					<td><input type="text" name="name" value="{{lodgingsInfo.name}}" /></td>
+					<td><input type="text" name="description" value="{{lodgingsInfo.description}}"/></td>
+					<td><input type="text" name="street" value="{{lodgingsInfo.street}}"/></td>
+					<td><input type="text" name="city" value="{{lodgingsInfo.city}}" /></td>
+					<td><input type="text" name="state" value="{{lodgingsInfo.state}}"/></td>
+					<td><input type="text" name="zip" value="{{lodgingsInfo.zip}}" maxlength="5"/></td>
+					<td><input type="text" name="price" value="{{lodgingsInfo.price}}"/></td>
+					<td><input type="text" name="ownerid" value="{{lodgingsInfo.ownerid}}"/></td>
+					<td><input type="submit" value="Update"/></td>
+					<td><a href="/lodgings"><input type="button" value="Cancel" ></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+{{/if}}
+
+
+<br>
+<p>
+Page Number: {{lodgingsInfo.pageNumber}} of {{lodgingsInfo.totalPages}}
+</p>
+
+<script src="../rowEditter.js"></script>
+
