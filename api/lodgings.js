@@ -395,7 +395,7 @@ function getUserById(ownerid, mysqlPool){
 				if (err) {
 					reject(err);
 				} else {
-					resolve(results);
+					resolve(results[0]);
 				}
 			}
 		);
@@ -403,7 +403,7 @@ function getUserById(ownerid, mysqlPool){
 }
 
 
-router.get('/users_put/:ownerid', function(req, res, next){
+router.post('/users_put/:ownerid', function(req, res, next){
 	const mysqlPool = req.app.locals.mysqlPool;
 	const ownerid = parseInt(req.params.ownerid);
 	console.log("id is ", ownerid);
@@ -423,9 +423,12 @@ router.get('/updateUsers', function(req, res, next){
 	const ownerid = parseInt(req.query.id);
 	getUserById(ownerid, mysqlPool)
 	.then((userInfo) => {
+	if(userInfo){
 		console.log("data is ", userInfo);
-		res.render('users', {userInfos: userInfo, update: true, table: false});
-		
+		res.render('users', {userInfo: userInfo, update: true, table: false});
+	}
+	else
+		next();
 	})
 	.catch((err) => {
 		res.status(500).json({
